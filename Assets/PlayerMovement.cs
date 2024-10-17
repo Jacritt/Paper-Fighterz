@@ -1,7 +1,10 @@
+using System.Data.Common;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool isPlayer1 = true;
     public float moveSpeed = 5f;   // Speed of the player
     public float jumpForce = 5f;   // Jump force
     public float gravityScale = 5f; // Gravity scalar
@@ -10,11 +13,16 @@ public class PlayerMovement : MonoBehaviour
     public float dashDuration = 0.2f; // Duration of the dash
     private float tapDelay = 0.3f;  // Time window for double tap
 
-    private Rigidbody2D rb;         // Reference to Rigidbody2D
+    public Rigidbody2D rb;         // Reference to Rigidbody2D
+    public bool isWalking = false;
+    public bool isJumping = false;
     private bool isGrounded;        // Check if the player is on the ground
-    private bool isDashing = false; // Flag to check if the player is dashing
+    public bool isDashing = false; // Flag to check if the player is dashing
     private float lastTapTime;      // Time of the last key press
     private Vector2 dashDirection;  // Direction of the dash
+
+    public Animator animator;
+
 
     
      
@@ -22,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -30,38 +39,85 @@ public class PlayerMovement : MonoBehaviour
         {
             Move();
             Jump();
+            //HandleAttack();
         }
 
         // Set the gravity scale
         rb.gravityScale = gravityScale;
 
         // Handle dashing
-        HandleDash();
+        if(!isJumping){
+            HandleDash();
+        }
     }
 
     void Move()
     {
-        float moveInput = Input.GetAxis("Horizontal"); // Get horizontal input
-        rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y); // Set new velocity
+        if (isPlayer1){
+            if (Input.GetKey(KeyCode.D)){
+                rb.velocity = new Vector2(moveSpeed, rb.velocity.y); // Set new velocity
+                isWalking = true;
+                
+            } 
+            else if (Input.GetKey(KeyCode.A)){
+                rb.velocity = new Vector2(-moveSpeed, rb.velocity.y); // Set new velocity
+                isWalking = true;
+                
+            }
+            else{
+                isWalking = false;
+                
+            }
+
+        }
+        else{
+            if (Input.GetKey(KeyCode.RightArrow)){
+                rb.velocity = new Vector2(moveSpeed, rb.velocity.y); // Set new velocity
+                isWalking = true;
+            } 
+            else if (Input.GetKey(KeyCode.LeftArrow)){
+                rb.velocity = new Vector2(-moveSpeed, rb.velocity.y); // Set new velocity
+                isWalking = true;
+            }
+            else{
+                isWalking = false;
+            }
+        }
+
+        animator.SetBool("isWalking", isWalking);
+    
     }
 
     void Jump()
     {
-        if (jumps > 0 && Input.GetKeyDown(KeyCode.W)) // Check if grounded and jump button pressed
-        {
-            jumps--;
-            rb.velocity = new Vector2(rb.velocity.x, 0); // Reset vertical velocity
-            rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse); // Apply jump force
+        if (isPlayer1){
+            if (jumps > 0 && Input.GetKeyDown(KeyCode.W)) // Check if grounded and jump button pressed
+            {
+                jumps--;
+                rb.velocity = new Vector2(rb.velocity.x, 0); // Reset vertical velocity
+                rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse); // Apply jump force
+                //isJumping = true;
+            }
+        }
+        else{
+            if (jumps > 0 && Input.GetKeyDown(KeyCode.UpArrow)) // Check if grounded and jump button pressed
+            {
+                jumps--;
+                rb.velocity = new Vector2(rb.velocity.x, 0); // Reset vertical velocity
+                rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse); // Apply jump force
+                //isJumping = true;
+            }
         }
     }
+
 
 
     void HandleDash()
     {
         float moveInput = Input.GetAxisRaw("Horizontal");
-
+        
         // Check for double tap to the right
-        if (Input.GetKeyDown(KeyCode.D) && Time.time - lastTapTime < tapDelay)
+        if (Input.GetKeyDown(KeyCode.D) && Time.time - lastTapTime < tapDelay && !isDashing)
         {
             Dash(Vector2.right);
         }
@@ -71,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Check for double tap to the left
-        if (Input.GetKeyDown(KeyCode.A) && Time.time - lastTapTime < tapDelay)
+        if (Input.GetKeyDown(KeyCode.A) && Time.time - lastTapTime < tapDelay && !isDashing)
         {
             Dash(Vector2.left);
         }
@@ -118,7 +174,10 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = true; // Set isGrounded to true
             jumps = 2; // Reset jumps when grounded
+            isJumping = false;
         }
+
+        animator.SetBool("isInAir", isJumping);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -126,6 +185,8 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground")) // Check for leaving ground
         {
             isGrounded = false; // Set isGrounded to false
+            isJumping = true;
         }
+        animator.SetBool("isInAir", isJumping);
     }
 }
