@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 51742106}
   m_Layer: 0
   m_Name: Untitled design (23)
-  m_TagString: Untagged
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1118,7 +1118,9 @@ MonoBehaviour:
   isWalking: 0
   isJumping: 0
   isDashing: 0
+  isStunned: 0
   animator: {fileID: 0}
+  otherPlayer: {fileID: 0}
 --- !u!95 &1228348655
 Animator:
   serializedVersion: 5

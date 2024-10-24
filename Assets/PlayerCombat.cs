@@ -45,22 +45,44 @@ public class PlayerCombat : MonoBehaviour
     }
 
     void HandleAttack(){
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (Input.GetKey(KeyCode.W))
+        if (playerMovement.isPlayer1){
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                UpAttack();
-                timeBtwAttack = startTimeBtwAttack;
+                if (Input.GetKey(KeyCode.W))
+                {
+                    UpAttack();
+                    timeBtwAttack = startTimeBtwAttack;
+                }
+                else if (Input.GetKey(KeyCode.S))
+                {
+                    DownAttack();
+                    timeBtwAttack = startTimeBtwAttack;
+                }
+                else
+                {
+                    NormalAttack();
+                    timeBtwAttack = startTimeBtwAttack;
+                }
             }
-            else if (Input.GetKey(KeyCode.S))
+        }
+        else{
+            if (Input.GetKeyDown(KeyCode.RightControl))
             {
-                DownAttack();
-                timeBtwAttack = startTimeBtwAttack;
-            }
-            else
-            {
-                NormalAttack();
-                timeBtwAttack = startTimeBtwAttack;
+                if (Input.GetKey(KeyCode.UpArrow))
+                {
+                    UpAttack();
+                    timeBtwAttack = startTimeBtwAttack;
+                }
+                else if (Input.GetKey(KeyCode.DownArrow))
+                {
+                    DownAttack();
+                    timeBtwAttack = startTimeBtwAttack;
+                }
+                else
+                {
+                    NormalAttack();
+                    timeBtwAttack = startTimeBtwAttack;
+                }
             }
         }
         

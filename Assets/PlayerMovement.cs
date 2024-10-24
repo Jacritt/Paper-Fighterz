@@ -18,11 +18,12 @@ public class PlayerMovement : MonoBehaviour
     public bool isJumping = false;
     private bool isGrounded;        // Check if the player is on the ground
     public bool isDashing = false; // Flag to check if the player is dashing
+    public bool isStunned = false;
     private float lastTapTime;      // Time of the last key press
     private Vector2 dashDirection;  // Direction of the dash
 
     public Animator animator;
-
+    public Transform otherPlayer;
 
     
      
@@ -31,24 +32,25 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        rb.gravityScale = gravityScale;
     }
 
     void Update()
     {
-        if (!isDashing)
-        {
+        PlayerFaceEnemy();
+        if (!isDashing && !isStunned){
             Move();
             Jump();
-            //HandleAttack();
         }
-
-        // Set the gravity scale
-        rb.gravityScale = gravityScale;
 
         // Handle dashing
-        if(!isJumping){
+        if(!isJumping && !isStunned){
             HandleDash();
         }
+
+        
+        animator.SetBool("isStunned", isStunned);
+        
     }
 
     void Move()
@@ -114,26 +116,48 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleDash()
     {
-        float moveInput = Input.GetAxisRaw("Horizontal");
+        //float moveInput = Input.GetAxisRaw("Horizontal");
         
         // Check for double tap to the right
-        if (Input.GetKeyDown(KeyCode.D) && Time.time - lastTapTime < tapDelay && !isDashing)
-        {
-            Dash(Vector2.right);
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            lastTapTime = Time.time;
-        }
+        if (isPlayer1){
+            if (Input.GetKeyDown(KeyCode.D) && Time.time - lastTapTime < tapDelay && !isDashing)
+            {
+                Dash(Vector2.right);
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                lastTapTime = Time.time;
+            }
 
-        // Check for double tap to the left
-        if (Input.GetKeyDown(KeyCode.A) && Time.time - lastTapTime < tapDelay && !isDashing)
-        {
-            Dash(Vector2.left);
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            lastTapTime = Time.time;
+            // Check for double tap to the left
+            if (Input.GetKeyDown(KeyCode.A) && Time.time - lastTapTime < tapDelay && !isDashing)
+            {
+                Dash(Vector2.left);
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                lastTapTime = Time.time;
+            }
+        } 
+        else{
+            if (Input.GetKeyDown(KeyCode.RightArrow) && Time.time - lastTapTime < tapDelay && !isDashing)
+            {
+                Dash(Vector2.right);
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                lastTapTime = Time.time;
+            }
+
+            // Check for double tap to the left
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && Time.time - lastTapTime < tapDelay && !isDashing)
+            {
+                Dash(Vector2.left);
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                lastTapTime = Time.time;
+            }
         }
     }
 
@@ -165,6 +189,37 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isDashing = false;
+    }
+
+    private void PlayerFaceEnemy(){
+        
+        if (otherPlayer != null)
+        {
+            // Check the x positions to determine if the player should face left or right
+            if (otherPlayer.position.x < transform.position.x)
+            {
+                // Other player is to the left, flip the player to face left
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else
+            {
+                // Other player is to the right, face right
+                if (transform.localScale != new Vector3(1, 1, 1)){
+                    transform.localScale = new Vector3(1, 1, 1);
+                }
+                
+            }
+        }
+
+        else{
+            if (isPlayer1){
+                otherPlayer = GameObject.FindWithTag("Player2").transform;
+            }
+            else{
+                otherPlayer = GameObject.FindWithTag("Player1").transform;
+            }
+        }
+    
     }
 
 
