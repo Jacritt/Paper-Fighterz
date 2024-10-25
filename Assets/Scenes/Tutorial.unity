@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 51742107}
   - component: {fileID: 51742106}
+  - component: {fileID: 51742108}
   m_Layer: 0
   m_Name: Untitled design (23)
   m_TagString: Player2
@@ -207,6 +208,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &51742108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51742105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d7166adbf2eee54d90ce6589a6237d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 3
 --- !u!1 &115701773
 GameObject:
   m_ObjectHideFlags: 0
@@ -2301,6 +2316,7 @@ RectTransform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1802976423}
   - {fileID: 519420032}
   - {fileID: 1314586119}
   - {fileID: 757813145}
@@ -2308,7 +2324,6 @@ SceneRoots:
   - {fileID: 2001313375}
   - {fileID: 1074061259}
   - {fileID: 51742107}
-  - {fileID: 1802976423}
   - {fileID: 491994577}
   - {fileID: 1244781227}
   - {fileID: 1378448911}
