@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;        // Check if the player is on the ground
     public bool isDashing = false; // Flag to check if the player is dashing
     public bool isStunned = false;
+    public bool isDead = false;
     private float lastTapTime;      // Time of the last key press
     private Vector2 dashDirection;  // Direction of the dash
 
@@ -37,17 +38,21 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        PlayerFaceEnemy();
-        if (!isDashing && !isStunned){
-            Move();
-            Jump();
-        }
+        if (!isDead){
+            PlayerFaceEnemy();
+            if (!isDashing && !isStunned){
+                Move();
+                Jump();
+            }
 
-        // Handle dashing
-        if(!isJumping && !isStunned){
-            HandleDash();
+            // Handle dashing
+            if(!isJumping && !isStunned){
+                HandleDash();
+            }
         }
-
+        else{
+            animator.SetTrigger("Dead");
+        }
         
         animator.SetBool("isStunned", isStunned);
         
