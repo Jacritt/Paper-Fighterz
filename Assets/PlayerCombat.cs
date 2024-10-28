@@ -18,13 +18,14 @@ public class PlayerCombat : MonoBehaviour
     }
 
     void Update(){
-        if (timeBtwAttack <= 0){
-            HandleAttack();
-            
-        }else{
-            timeBtwAttack -= Time.deltaTime;
+        if (!playerMovement.isDead){
+            if (timeBtwAttack <= 0){
+                HandleAttack();
+                
+            }else{
+                timeBtwAttack -= Time.deltaTime;
+            }
         }
-        
     }
 
 
