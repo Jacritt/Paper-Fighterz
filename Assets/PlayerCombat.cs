@@ -11,6 +11,8 @@ public class PlayerCombat : MonoBehaviour
     private float timeBtwAttack;
     public float startTimeBtwAttack;
 
+    public CapsuleCollider2D[] attackHitboxes;
+
     void Start() {
         playerMovement = GetComponent<PlayerMovement>();
         animator = GetComponent<Animator>();
@@ -28,6 +30,33 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    private void LaunchAttack(Collider2D col)
+    {
+        // Cast the collider to a CapsuleCollider2D if possible
+        CapsuleCollider2D capsuleCol = col as CapsuleCollider2D;
+        if (capsuleCol != null)
+        {
+            // Define capsule size and orientation
+            Vector2 size = new Vector2(capsuleCol.size.x, capsuleCol.size.y);
+            CapsuleDirection2D direction = capsuleCol.direction;
+
+            // Use OverlapCapsule for 2D to find colliders overlapping the capsule
+            Collider2D[] cols = Physics2D.OverlapCapsuleAll(capsuleCol.bounds.center, size, direction, 0, LayerMask.GetMask("Hitbox"));
+            foreach (Collider2D c in cols)
+            {
+                if (c.transform.parent == transform)
+                    continue;
+                print(c);
+
+                float damage = 5;
+                c.SendMessageUpwards("TakeDamage", damage);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Collider is not a CapsuleCollider2D.");
+        }
+    }
 
     public void NormalAttack()
     {
@@ -52,16 +81,19 @@ public class PlayerCombat : MonoBehaviour
                 if (Input.GetKey(KeyCode.W))
                 {
                     UpAttack();
+                    LaunchAttack(attackHitboxes[2]);
                     timeBtwAttack = startTimeBtwAttack;
                 }
                 else if (Input.GetKey(KeyCode.S))
                 {
                     DownAttack();
+                    LaunchAttack(attackHitboxes[1]);
                     timeBtwAttack = startTimeBtwAttack;
                 }
                 else
                 {
                     NormalAttack();
+                    LaunchAttack(attackHitboxes[0]);
                     timeBtwAttack = startTimeBtwAttack;
                 }
             }
@@ -88,6 +120,6 @@ public class PlayerCombat : MonoBehaviour
         }
         
     }
-
+    
 
 }
