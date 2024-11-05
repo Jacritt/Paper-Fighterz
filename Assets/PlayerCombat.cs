@@ -50,6 +50,7 @@ public class PlayerCombat : MonoBehaviour
 
                 float damage = 5;
                 c.SendMessageUpwards("TakeDamage", damage);
+                print("damaged");
             }
         }
         else
@@ -104,16 +105,19 @@ public class PlayerCombat : MonoBehaviour
                 if (Input.GetKey(KeyCode.UpArrow))
                 {
                     UpAttack();
+                    LaunchAttack(attackHitboxes[2]);
                     timeBtwAttack = startTimeBtwAttack;
                 }
                 else if (Input.GetKey(KeyCode.DownArrow))
                 {
                     DownAttack();
+                    LaunchAttack(attackHitboxes[1]);
                     timeBtwAttack = startTimeBtwAttack;
                 }
                 else
                 {
                     NormalAttack();
+                    LaunchAttack(attackHitboxes[0]);
                     timeBtwAttack = startTimeBtwAttack;
                 }
             }
