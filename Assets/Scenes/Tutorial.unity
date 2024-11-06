@@ -1924,7 +1924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  healthBar: {fileID: 1169454253}
+  healthBar: {fileID: 303517932}
 --- !u!50 &1671132362
 Rigidbody2D:
   serializedVersion: 4
