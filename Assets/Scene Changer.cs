@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class Dialogscript : MonoBehaviour
 {
+    public static int selectedLevel;
+    public int level;
+
     public void LoadScene(string sceneName)
     {
+        selectedLevel = level;
         SceneManager.LoadScene(sceneName);
     }
 }
