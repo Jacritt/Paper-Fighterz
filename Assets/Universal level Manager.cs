@@ -12,7 +12,7 @@ public class UniversallevelManager : MonoBehaviour
     {
         int level = Dialogscript.selectedLevel;
         Debug.Log(level);
-        background.sprite = backgrounds[level-1];
+        background.sprite = backgrounds[level+1];
     }
 
     // Update is called once per frame
