@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
     {
         public GameObject p1_character_prefab;
         public GameObject p2_character_prefab;
+        public GameObject background_prefab;
 
 
-        public static GameManager gameManager;
+
+    public static GameManager gameManager;
         void Awake()
         {
             if(gameManager == null)
