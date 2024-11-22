@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BaseCharacter : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class BaseCharacter : MonoBehaviour
     public bool isGrounded = false;    // Whether the player is on the ground
     public LayerMask groundLayer;      // Layer to check for the ground
     public float groundCheckRadius = 1f; // Radius of ground check
+    public UnityEvent JumpEvent;
+    public UnityEvent LandedEvent;
 
 
     // Walking & Attacking
@@ -155,6 +158,7 @@ public class BaseCharacter : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(transform.position, groundCheckRadius, groundLayer);
         if (isGrounded && jumps < 2){
             jumps = 2;
+            LandedEvent.Invoke();
         }
 
         // Jump if the W key is pressed and the character is grounded
@@ -164,6 +168,7 @@ public class BaseCharacter : MonoBehaviour
                 jumps--;
                 isJumping = true;
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                JumpEvent.Invoke();
             }
         }else{
             if (Input.GetKeyDown(KeyCode.UpArrow) && jumps > 0)
@@ -171,6 +176,7 @@ public class BaseCharacter : MonoBehaviour
                 jumps--;
                 isJumping = true;
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                JumpEvent.Invoke();
             }
         }
     }

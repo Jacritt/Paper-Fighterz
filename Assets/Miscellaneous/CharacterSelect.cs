@@ -28,7 +28,9 @@ public class CharacterSelect : MonoBehaviour
     public bool isP1Selected = false;
     public bool isP2Selected = false;
     public UnityEvent P1Selected_Event;
+    public UnityEvent P1Unselected_Event;
     public UnityEvent P2Selected_Event;
+    public UnityEvent P2Unselected_Event;
 
     public List<GameObject> slots;
     void Start()
@@ -81,6 +83,7 @@ public class CharacterSelect : MonoBehaviour
             if (isP1Selected){
                 isP1Selected= false;
                 p1_selectedCharacter = null;
+                P1Unselected_Event.Invoke();
             }
             else{
                 p1_selectedCharacter = slots[p1_Current_Slot].GetComponent<SlotCharacterData>().characterPrefab;
@@ -108,6 +111,7 @@ public class CharacterSelect : MonoBehaviour
            if (isP2Selected){
                 isP2Selected = false;
                 p2_selectedCharacter = null;
+                P2Unselected_Event.Invoke();
             }
             else{
                 p2_selectedCharacter = slots[p2_Current_Slot].GetComponent<SlotCharacterData>().characterPrefab;
