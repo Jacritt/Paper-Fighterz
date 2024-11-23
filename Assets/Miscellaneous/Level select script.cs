@@ -65,13 +65,13 @@ public class Levelselectscript : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.W) && !isP1Selected)
         {
-            if (p1_Current_Slot - 5 < 0) { return; }
-            p1_Current_Slot = p1_Current_Slot - 5;
+            if (p1_Current_Slot - 8 < 0) { return; }
+            p1_Current_Slot = p1_Current_Slot - 8;
         }
         if (Input.GetKeyDown(KeyCode.S) && !isP1Selected)
         {
-            if (p1_Current_Slot + 5 > maxSlots - 1) { return; }
-            p1_Current_Slot = p1_Current_Slot + 5;
+            if (p1_Current_Slot + 8 > maxSlots - 1) { return; }
+            p1_Current_Slot = p1_Current_Slot + 8;
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
