@@ -899,6 +899,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p1_character_prefab: {fileID: 0}
   p2_character_prefab: {fileID: 0}
+  background_prefab: {fileID: 0}
 --- !u!4 &466959372
 Transform:
   m_ObjectHideFlags: 0

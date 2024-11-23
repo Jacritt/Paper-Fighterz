@@ -58,7 +58,7 @@ public class CharacterSelect : MonoBehaviour
             isP2Selected = false;
             GameManager.gameManager.p1_character_prefab = p1_selectedCharacter;
             GameManager.gameManager.p2_character_prefab = p2_selectedCharacter;
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("LevelSelect");
             print("LoadNewScene");
         }
     }
