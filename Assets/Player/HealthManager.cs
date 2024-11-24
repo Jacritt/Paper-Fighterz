@@ -18,7 +18,7 @@ public class HealthManager : MonoBehaviour
         currentHealth = maxHealth; // Initialize current health
         baseCharacter = GetComponent<BaseCharacter>();
 
-        if(gameObject.tag == "Player1"){
+        if(baseCharacter.isPlayer1){
             healthBar = GameObject.FindGameObjectWithTag("Player1HealthBar").GetComponent<Slider>();
         }
         else{
@@ -31,12 +31,12 @@ public class HealthManager : MonoBehaviour
         
     }
     void Update(){
-        if(Input.GetKeyDown(KeyCode.E) ){ // && playerMovement.isPlayer1){
-            TakeDamage(20);
-        }
-        if(Input.GetKeyDown(KeyCode.R)){ // && !playerMovement.isPlayer1){
-            TakeDamage(20);
-        }
+        // if(Input.GetKeyDown(KeyCode.E) && baseCharacter.isPlayer1){ 
+        //     TakeDamage(20);
+        // }
+        // if(Input.GetKeyDown(KeyCode.R) && !baseCharacter.isPlayer1){ 
+        //     TakeDamage(20);
+        // }
     }
 
 
@@ -53,6 +53,7 @@ public class HealthManager : MonoBehaviour
             PlayerLose();
         }
         UpdateHealthBar(); // Update the health display
+        baseCharacter.StunPlayer();
     }
 
     // Method to heal

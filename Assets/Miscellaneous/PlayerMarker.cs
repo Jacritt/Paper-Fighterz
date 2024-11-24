@@ -7,7 +7,7 @@ public class PlayerMarker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (gameObject.GetComponentInParent<BaseCharacter>().playerType == "Player1"){
+        if (gameObject.GetComponentInParent<BaseCharacter>().isPlayer1){
             gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         }
         else{

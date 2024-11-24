@@ -42,10 +42,11 @@ public class BaseCharacter : MonoBehaviour
     // Player Info
     [Header("Player Info")]
     public string characterName = "";  // Name of the character
-    public string playerType = "";
+    public bool isPlayer1;
     public string currentState = "";   // Current animation state
     public Transform otherPlayerTransform;
     public bool isDead = false;
+    public bool isStunned = false;
 
 
     // Components
@@ -66,8 +67,9 @@ public class BaseCharacter : MonoBehaviour
     void Update()
     {
         if (isDead){ChangeAnimationState("DEAD");return;}
+        if (isStunned){ChangeAnimationState("STUN");return;}
 
-        HandleMovement();
+        if(!isAttacking){HandleMovement();};
         HandleJumping();
         HandleAttacks();
         PlayerFaceEnemy();
@@ -122,7 +124,7 @@ public class BaseCharacter : MonoBehaviour
 
     private void HandleMovement()
     {
-        if (playerType == "Player1"){
+        if (isPlayer1){
             if (Input.GetKey(KeyCode.A)){
                 horizontalInput = -1;
             }
@@ -162,7 +164,7 @@ public class BaseCharacter : MonoBehaviour
         }
 
         // Jump if the W key is pressed and the character is grounded
-        if (playerType == "Player1"){
+        if (isPlayer1){
             if (Input.GetKeyDown(KeyCode.W) && jumps > 0)
             {
                 jumps--;
@@ -183,7 +185,7 @@ public class BaseCharacter : MonoBehaviour
 
     private void HandleDash()
     {
-        if(playerType == "Player1"){
+        if(isPlayer1){
 
             if (Input.GetKeyDown(KeyCode.D) && Time.time - lastTapTime < tapDelay && !isDashing)
                 {
@@ -264,7 +266,7 @@ public class BaseCharacter : MonoBehaviour
         // Don't allow attacks if the cooldown hasn't elapsed
         if (attackTimer > 0) return; // Wait for the cooldown
 
-        if (playerType =="Player1"){
+        if (isPlayer1){
             if (Input.GetKey(KeyCode.Space))
             {
                 if (Input.GetKey(KeyCode.W))
@@ -285,7 +287,7 @@ public class BaseCharacter : MonoBehaviour
             }
         }
         else{
-            if (Input.GetKey(KeyCode.RightControl))
+            if (Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.RightShift))
             {
                 if (Input.GetKey(KeyCode.UpArrow))
                 {
@@ -380,7 +382,16 @@ public class BaseCharacter : MonoBehaviour
     }
         
 
-     
+     public void StunPlayer(){
+        isStunned = true;
+        rb.AddForce(new Vector2(200 * -transform.localScale.x, 0));
+        Invoke("StopStunningPlayer", 0.3f);
+     }
+
+     public void StopStunningPlayer(){
+        isStunned = false;
+     }
+
         
     
 }

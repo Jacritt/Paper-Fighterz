@@ -107,7 +107,7 @@ public class CharacterSelect : MonoBehaviour
             if (p2_Current_Slot+5 > maxSlots-1){return;}
             p2_Current_Slot = p2_Current_Slot+5;
         }
-        if(Input.GetKeyDown(KeyCode.RightControl)){
+        if(Input.GetKeyDown(KeyCode.RightControl) || Input.GetKeyDown(KeyCode.RightShift)){
            if (isP2Selected){
                 isP2Selected = false;
                 p2_selectedCharacter = null;
