@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
         public GameObject p1_character_prefab;
         public GameObject p2_character_prefab;
         public GameObject background_prefab;
-        
+        public AudioSource musicSource;
 
 
     public static GameManager gameManager;

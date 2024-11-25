@@ -8,4 +8,5 @@ public class SlotCharacterData: MonoBehaviour
     public string characterName = "NAME";
     public GameObject characterPrefab;
     public Sprite characterIcon;
+    public AudioSource bgmusic;
 }

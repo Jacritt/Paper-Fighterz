@@ -132,15 +132,31 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 18812821}
-  - component: {fileID: 18812820}
+  - component: {fileID: 18812823}
+  - component: {fileID: 18812822}
   m_Layer: 0
-  m_Name: Music
+  m_Name: Music Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!82 &18812820
+--- !u!4 &18812821
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18812819}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -214.18982, y: -67.527954, z: -23.865974}
+  m_LocalScale: {x: 2.3999999, y: 2.3999999, z: 2.3999999}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &18812822
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,11 +166,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 57f76988e0a956c45af0295b22901063, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -236,21 +252,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!4 &18812821
-Transform:
+--- !u!114 &18812823
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 18812819}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -214.18982, y: -67.527954, z: -23.865974}
-  m_LocalScale: {x: 2.3999999, y: 2.3999999, z: 2.3999999}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f2703c5297f4b749b6d7518717419be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
 --- !u!1 &40126681
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,6 +433,7 @@ MonoBehaviour:
   characterName: Crystal Cave
   characterPrefab: {fileID: 2077956190216324375, guid: 124943886568a924cacd729c3f88929f, type: 3}
   characterIcon: {fileID: 21300000, guid: b9f0faf5cc1f49d43a3b61b0486a3446, type: 3}
+  bgmusic: {fileID: 0}
 --- !u!1 &47402662
 GameObject:
   m_ObjectHideFlags: 0
@@ -933,6 +948,7 @@ MonoBehaviour:
   characterName: Heaven's Grove
   characterPrefab: {fileID: 3762943037723241991, guid: 6ff2758725f0b5241bd218c8ceb14a71, type: 3}
   characterIcon: {fileID: 21300000, guid: f048f757b9ee7bb4dabec5cbe1cbef6a, type: 3}
+  bgmusic: {fileID: 0}
 --- !u!1 &265670606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1026,6 +1042,7 @@ MonoBehaviour:
   characterName: an Airport
   characterPrefab: {fileID: 520903119119316874, guid: cca46ae9b7f74054eb125fad60c387e7, type: 3}
   characterIcon: {fileID: 21300000, guid: 15b662255b7ec2448a5e539c922bdcc1, type: 3}
+  bgmusic: {fileID: 0}
 --- !u!1 &281044627
 GameObject:
   m_ObjectHideFlags: 0
@@ -1630,6 +1647,7 @@ MonoBehaviour:
   characterName: The Falls
   characterPrefab: {fileID: 1251990703316846318, guid: 6223120878f6b23408e15bd444a3d3ed, type: 3}
   characterIcon: {fileID: 21300000, guid: bb4427513c34bdc479662b396a7ad2a0, type: 3}
+  bgmusic: {fileID: 0}
 --- !u!1 &521733414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1815,6 +1833,7 @@ MonoBehaviour:
   characterName: Matrix
   characterPrefab: {fileID: 4846004705460336759, guid: ce5e643c093136f419a3d90f1fa41f43, type: 3}
   characterIcon: {fileID: 21300000, guid: 52a79d1e774adbf46a55584a8694a599, type: 3}
+  bgmusic: {fileID: 0}
 --- !u!1 &603240301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1993,6 +2012,7 @@ MonoBehaviour:
   characterName: Champion's Ring
   characterPrefab: {fileID: 3687000596398828862, guid: 92673e4d45403534f8cc475e08c4c08c, type: 3}
   characterIcon: {fileID: 21300000, guid: 2a0e6ece546fc1a4398f1537a8d60987, type: 3}
+  bgmusic: {fileID: 0}
 --- !u!1 &687329514
 GameObject:
   m_ObjectHideFlags: 0
@@ -2439,6 +2459,7 @@ MonoBehaviour:
   characterName: Burned Village
   characterPrefab: {fileID: 1763937764724459209, guid: 4ca11c08b98a3a045a98e3af533bec8d, type: 3}
   characterIcon: {fileID: 21300000, guid: 8dabef652e268884e8591062f85f2033, type: 3}
+  bgmusic: {fileID: 0}
 --- !u!1 &766403773
 GameObject:
   m_ObjectHideFlags: 0
@@ -2532,6 +2553,7 @@ MonoBehaviour:
   characterName: Someone's Backyard
   characterPrefab: {fileID: 7633659173794819209, guid: 52c39e6dea8918640886bd696bbb281e, type: 3}
   characterIcon: {fileID: 21300000, guid: 2074b703dd40693458cb726fddd0c7b8, type: 3}
+  bgmusic: {fileID: 0}
 --- !u!1 &800551970
 GameObject:
   m_ObjectHideFlags: 0
@@ -2657,6 +2679,7 @@ MonoBehaviour:
   maxSlots: 0
   p1_Current_Slot: 0
   backgroundCharacter: {fileID: 0}
+  bgmusic: {fileID: 0}
   isP1Selected: 0
   P1Selected_Event:
     m_PersistentCalls:
@@ -2783,6 +2806,7 @@ MonoBehaviour:
   characterName: Unclaimed Throne
   characterPrefab: {fileID: 4701284866970866638, guid: 5cf7f9d96d3c85849b5f6ae276e5b43d, type: 3}
   characterIcon: {fileID: 21300000, guid: e6d8c981ca9dd974aa9d1f4bf73b66a7, type: 3}
+  bgmusic: {fileID: 0}
 --- !u!1 &953129255
 GameObject:
   m_ObjectHideFlags: 0
@@ -3010,6 +3034,7 @@ MonoBehaviour:
   characterName: Ohio 2176
   characterPrefab: {fileID: 5929919355037031390, guid: 6b4629a68611a3c44ac482f60606c50c, type: 3}
   characterIcon: {fileID: 21300000, guid: 7588e1493ec3957439cf99401d038ea4, type: 3}
+  bgmusic: {fileID: 0}
 --- !u!1 &973265812
 GameObject:
   m_ObjectHideFlags: 0
@@ -3253,6 +3278,7 @@ MonoBehaviour:
   characterName: Everegreen
   characterPrefab: {fileID: 8988715354820556011, guid: 585eaf720f0ee714cb3dc8f3de4441bf, type: 3}
   characterIcon: {fileID: 21300000, guid: a1eeabbb35ce11244808f26597fb3b41, type: 3}
+  bgmusic: {fileID: 0}
 --- !u!1 &1087078255
 GameObject:
   m_ObjectHideFlags: 0
@@ -3721,6 +3747,7 @@ MonoBehaviour:
   characterName: Meosjin Market
   characterPrefab: {fileID: 1474092861508360838, guid: 1ba7fd89b94c67e4999329e3a0ee57ee, type: 3}
   characterIcon: {fileID: 21300000, guid: 8e392d0bd41f6494b986b46430726430, type: 3}
+  bgmusic: {fileID: 0}
 --- !u!1 &1307933006
 GameObject:
   m_ObjectHideFlags: 0
@@ -3814,6 +3841,7 @@ MonoBehaviour:
   characterName: The Shift
   characterPrefab: {fileID: 6780616631475458598, guid: 45be0fe425102fb46b140549d584660c, type: 3}
   characterIcon: {fileID: 21300000, guid: 3b580a2fc8973cc4abf102365ac62754, type: 3}
+  bgmusic: {fileID: 0}
 --- !u!1 &1310621113
 GameObject:
   m_ObjectHideFlags: 0
@@ -3907,6 +3935,7 @@ MonoBehaviour:
   characterName: Rocky Beach
   characterPrefab: {fileID: 1933177237809128117, guid: adf9b4d1f0544ff4b85fe64d534eb337, type: 3}
   characterIcon: {fileID: 21300000, guid: 2fce220b530f53848a72e37ef8751813, type: 3}
+  bgmusic: {fileID: 0}
 --- !u!1 &1391964982
 GameObject:
   m_ObjectHideFlags: 0
@@ -4014,6 +4043,7 @@ MonoBehaviour:
   p1_character_prefab: {fileID: 0}
   p2_character_prefab: {fileID: 0}
   background_prefab: {fileID: 0}
+  musicSource: {fileID: 0}
 --- !u!4 &1401072093
 Transform:
   m_ObjectHideFlags: 0
@@ -4490,6 +4520,7 @@ MonoBehaviour:
   characterName: Jade Palace
   characterPrefab: {fileID: 6208182428677417727, guid: 2aa78d896704d0242a8c68d8c0485183, type: 3}
   characterIcon: {fileID: 21300000, guid: d884b02e66cbad844988b01f11c029cf, type: 3}
+  bgmusic: {fileID: 6574358145900247469, guid: b6cf26eab6cf3554989c72460353cb49, type: 3}
 --- !u!1 &1676648853
 GameObject:
   m_ObjectHideFlags: 0
@@ -4742,6 +4773,7 @@ MonoBehaviour:
   characterName: Abandoned Factory
   characterPrefab: {fileID: 1565345703499847499, guid: e980cf2bd7354d445bd8bbd93b0d1700, type: 3}
   characterIcon: {fileID: 21300000, guid: 6588bc3e5847fd54dabbcc4f6dafe85b, type: 3}
+  bgmusic: {fileID: 0}
 --- !u!1 &1881166147
 GameObject:
   m_ObjectHideFlags: 0

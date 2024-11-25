@@ -21,9 +21,11 @@ public class Levelselectscript : MonoBehaviour
     public int maxSlots;
     public int p1_Current_Slot = 0;
     public GameObject backgroundCharacter;
+    public AudioSource bgmusic;
     public bool isP1Selected = false;
     public UnityEvent P1Selected_Event;
     public UnityEvent P1Unselected_Event;
+    
 
 
     [Header("Audio")]
@@ -40,6 +42,7 @@ public class Levelselectscript : MonoBehaviour
         }
 
         GameManager.gameManager.background_prefab = null;
+        GameManager.gameManager.musicSource = null;
     }
 
     void Update()
@@ -48,6 +51,8 @@ public class Levelselectscript : MonoBehaviour
         {
             //isP1Selected = false;
             GameManager.gameManager.background_prefab = backgroundCharacter;
+            GameManager.gameManager.musicSource = bgmusic;
+            MusicManager.musicManager.PlayMusic();
             Invoke("LoadStageScene", 0);
             print("LoadNewScene");
         }
