@@ -17,7 +17,12 @@ public class ProjectileSpawner : MonoBehaviour
         // Instantiate the projectile at the spawner's position and rotation
         GameObject newProjectile = Instantiate(projectilePrefab, spawnPoint.position, transform.rotation);
         float xDirection = gameObject.GetComponent<BaseCharacter>().transform.localScale.x;
-        newProjectile.GetComponent<Rigidbody2D>().velocity = transform.right * moveSpeed * xDirection * Time.deltaTime ;
+
+        if (gameObject.GetComponent<BaseCharacter>().transform.localScale.x < 0){
+            newProjectile.transform.localScale = new Vector2(-newProjectile.transform.localScale.x, newProjectile.transform.localScale.y);
+        }
+
+        newProjectile.GetComponent<Rigidbody2D>().velocity = spawnPoint.transform.right* moveSpeed * xDirection * Time.deltaTime ;
         newProjectile.GetComponent<Projectile>().damage = bulletDamage;
         Destroy(newProjectile, lifeTime);
         //transform.Translate(transform.up * moveSpeed * Time.deltaTime);
