@@ -1,16 +1,12 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using TMPro.Examples;
 using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class CharacterSelect : MonoBehaviour
 {
@@ -31,6 +27,9 @@ public class CharacterSelect : MonoBehaviour
     public UnityEvent P1Unselected_Event;
     public UnityEvent P2Selected_Event;
     public UnityEvent P2Unselected_Event;
+
+    [Header("Audio")]
+    public AudioClip switch_AC;
 
     public List<GameObject> slots;
     void Start()
@@ -63,21 +62,26 @@ public class CharacterSelect : MonoBehaviour
         }
     }
 
+    [Obsolete]
     public void HandleInput(){
         // Player 1 Controls
         if(Input.GetKeyDown(KeyCode.A) && !isP1Selected){
             p1_Current_Slot = math.clamp(p1_Current_Slot-1, 0, maxSlots-1);
+            SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
         }
         if(Input.GetKeyDown(KeyCode.D) && !isP1Selected){
             p1_Current_Slot = math.clamp(p1_Current_Slot+1, 0, maxSlots-1);
+            SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
         }
         if(Input.GetKeyDown(KeyCode.W) && !isP1Selected){
             if (p1_Current_Slot-5 < 0){return;}
             p1_Current_Slot = p1_Current_Slot-5;
+            SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
         }
         if(Input.GetKeyDown(KeyCode.S) && !isP1Selected){
             if (p1_Current_Slot+5 > maxSlots-1){return;}
             p1_Current_Slot = p1_Current_Slot+5;
+            SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
         }
         if(Input.GetKeyDown(KeyCode.Space)){
             if (isP1Selected){
@@ -87,6 +91,12 @@ public class CharacterSelect : MonoBehaviour
             }
             else{
                 p1_selectedCharacter = slots[p1_Current_Slot].GetComponent<SlotCharacterData>().characterPrefab;
+                if (p1_selectedCharacter == null){
+
+                    //GetRandomCharacter
+                    int randNum = UnityEngine.Random.Range(0,slots.Count);
+                    p1_selectedCharacter = slots[randNum].GetComponent<SlotCharacterData>().characterPrefab;
+                }
                 isP1Selected = true;
                 P1Selected_Event.Invoke();
             }
@@ -95,17 +105,21 @@ public class CharacterSelect : MonoBehaviour
         // Player 2 Controls
         if(Input.GetKeyDown(KeyCode.LeftArrow) && !isP2Selected){
             p2_Current_Slot = math.clamp(p2_Current_Slot-1, 0, maxSlots-1);
+            SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
         }
         if(Input.GetKeyDown(KeyCode.RightArrow) && !isP2Selected){
             p2_Current_Slot = math.clamp(p2_Current_Slot+1, 0, maxSlots-1);;
+            SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
         }
         if(Input.GetKeyDown(KeyCode.UpArrow) && !isP2Selected){
             if (p2_Current_Slot-5 < 0){return;}
             p2_Current_Slot = p2_Current_Slot-5;
+            SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
         }
         if(Input.GetKeyDown(KeyCode.DownArrow) && !isP2Selected){
             if (p2_Current_Slot+5 > maxSlots-1){return;}
             p2_Current_Slot = p2_Current_Slot+5;
+            SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
         }
         if(Input.GetKeyDown(KeyCode.RightControl) || Input.GetKeyDown(KeyCode.RightShift)){
            if (isP2Selected){

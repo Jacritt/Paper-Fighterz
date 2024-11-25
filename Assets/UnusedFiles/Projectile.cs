@@ -4,30 +4,22 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed = 20f; // Speed of the bullet
-    public float lifetime = 2f; // How long the bullet lasts before being destroyed
+    private Rigidbody2D rb;        // Rigidbody2D reference
+    public float damage;
 
-    private void Start()
+    private void Awake()
     {
-        // Destroy the bullet after a certain lifetime
-        Destroy(gameObject, lifetime);
+        // Get the Rigidbody2D component on this object
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
-    {
-        // Move the bullet forward
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
-    }
+    private void OnTriggerEnter2D(Collider2D other) {
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        // Add collision logic here (e.g., damage the player, hit enemies, etc.)
-        if (other.CompareTag("Enemy"))
-        {
-            // Handle enemy hit
-            Destroy(other.gameObject); // Example: destroy enemy
-            Destroy(gameObject); // Destroy the bullet
+        if (other.gameObject.GetComponent<HealthManager>()){
+            other.gameObject.GetComponent<HealthManager>().TakeDamage(damage);
+        Destroy(gameObject);
         }
     }
+
 }
 

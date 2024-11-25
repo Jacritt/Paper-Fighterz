@@ -25,6 +25,10 @@ public class Levelselectscript : MonoBehaviour
     public UnityEvent P1Selected_Event;
     public UnityEvent P1Unselected_Event;
 
+
+    [Header("Audio")]
+    public AudioClip switch_AC;
+
     public List<GameObject> slots;
     void Start()
     {
@@ -40,38 +44,53 @@ public class Levelselectscript : MonoBehaviour
 
     void Update()
     {
+        if (isP1Selected)
+        {
+            //isP1Selected = false;
+            GameManager.gameManager.background_prefab = backgroundCharacter;
+            Invoke("LoadStageScene", 0);
+            print("LoadNewScene");
+        }
+
         HandleInput();
         HandleSlot();
         HandleCharacterDisplay();
 
-        if (isP1Selected)
-        {
-            isP1Selected = false;
-            GameManager.gameManager.background_prefab = backgroundCharacter;
-            SceneManager.LoadScene("SampleScene");
-            print("LoadNewScene");
-        }
     }
+
+    public void LoadStageScene(){
+        isP1Selected = false;
+        SceneManager.LoadScene("SampleScene");
+    }
+
     public void HandleInput()
     {
         // Player 1 Controls
         if (Input.GetKeyDown(KeyCode.A) && !isP1Selected)
         {
             p1_Current_Slot = math.clamp(p1_Current_Slot - 1, 0, maxSlots - 1);
+            SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
+            
         }
         if (Input.GetKeyDown(KeyCode.D) && !isP1Selected)
         {
             p1_Current_Slot = math.clamp(p1_Current_Slot + 1, 0, maxSlots - 1);
+            SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
+            
         }
         if (Input.GetKeyDown(KeyCode.W) && !isP1Selected)
         {
             if (p1_Current_Slot - 8 < 0) { return; }
             p1_Current_Slot = p1_Current_Slot - 8;
+            SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
+            
         }
         if (Input.GetKeyDown(KeyCode.S) && !isP1Selected)
         {
             if (p1_Current_Slot + 8 > maxSlots - 1) { return; }
             p1_Current_Slot = p1_Current_Slot + 8;
+            SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
+            
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {

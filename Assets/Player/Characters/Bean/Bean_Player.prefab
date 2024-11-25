@@ -107,6 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 543473549011860847}
   - component: {fileID: 5365314286120972210}
+  - component: {fileID: 6018371390033847995}
   m_Layer: 0
   m_Name: Shadow
   m_TagString: Untagged
@@ -181,6 +182,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6018371390033847995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426546845232422982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7317c5790bef8141a2665ebfb835f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5622698487897008994
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,7 +206,7 @@ GameObject:
   - component: {fileID: 3974093389822200924}
   - component: {fileID: 5666877488299577452}
   - component: {fileID: 1900917260757234513}
-  - component: {fileID: 3621922853002318833}
+  - component: {fileID: 8751524927278837940}
   - component: {fileID: 3473302242966869456}
   m_Layer: 0
   m_Name: Bean_Player
@@ -298,7 +311,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 0}
---- !u!114 &3621922853002318833
+--- !u!114 &8751524927278837940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -307,7 +320,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5622698487897008994}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fa97c9859f50f046a8b5254900072dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e2538368b217b5418e6d94591049df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
@@ -322,36 +335,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   groundCheckRadius: 1.5
-  JumpEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1426546845232422982}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  LandedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1426546845232422982}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
   attackDamage: 10
   isAttacking: 0
   canAttack: 1

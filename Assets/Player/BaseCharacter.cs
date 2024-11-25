@@ -10,7 +10,7 @@ public class BaseCharacter : MonoBehaviour
     public float moveSpeed = 5f;       // Speed of movement
     public float horizontalInput;      // Input for horizontal movement
     public bool isWalking = false;
-    public float dashDuration = 0.1f;   // How long the dash lasts
+    public float dashDuration = 0.5f;   // How long the dash lasts
     public float dashDistance = 2f;
     private bool isDashing = false;     // Whether the player is dashing 
     private Vector2 dashDirection;  // Direction of the dash
@@ -20,14 +20,12 @@ public class BaseCharacter : MonoBehaviour
 
     // Jumping Variables
     [Header("Jumping")]
-    public float jumpForce = 5f;       // Force of the jump
+    public float jumpForce = 15f;       // Force of the jump
     private bool isJumping = false;    // Whether the player is currently jumping
     public int jumps = 2;
     public bool isGrounded = false;    // Whether the player is on the ground
     public LayerMask groundLayer;      // Layer to check for the ground
     public float groundCheckRadius = 1f; // Radius of ground check
-    public UnityEvent JumpEvent;
-    public UnityEvent LandedEvent;
 
 
     // Walking & Attacking
@@ -47,7 +45,8 @@ public class BaseCharacter : MonoBehaviour
     public Transform otherPlayerTransform;
     public bool isDead = false;
     public bool isStunned = false;
-
+    public Collider2D playerCollider;
+    public float stunTime = 0.3f;
 
     // Components
     private Rigidbody2D rb;            // Rigidbody component for physics
@@ -62,12 +61,16 @@ public class BaseCharacter : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         groundLayer = LayerMask.GetMask("groundLayer");
         hitbox = GetComponentInChildren<CircleCollider2D>();
+        playerCollider = GetComponent<Collider2D>();
     }
 
     void Update()
     {
         if (isDead){ChangeAnimationState("DEAD");return;}
         if (isStunned){ChangeAnimationState("STUN");return;}
+
+        if(gameObject.transform.position.x > 7){gameObject.transform.position = new Vector2(7,gameObject.transform.position.y);}
+        if(gameObject.transform.position.x < -7){gameObject.transform.position = new Vector2(-7,gameObject.transform.position.y);}
 
         if(!isAttacking){HandleMovement();};
         HandleJumping();
@@ -160,7 +163,6 @@ public class BaseCharacter : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(transform.position, groundCheckRadius, groundLayer);
         if (isGrounded && jumps < 2){
             jumps = 2;
-            LandedEvent.Invoke();
         }
 
         // Jump if the W key is pressed and the character is grounded
@@ -170,7 +172,6 @@ public class BaseCharacter : MonoBehaviour
                 jumps--;
                 isJumping = true;
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                JumpEvent.Invoke();
             }
         }else{
             if (Input.GetKeyDown(KeyCode.UpArrow) && jumps > 0)
@@ -178,7 +179,6 @@ public class BaseCharacter : MonoBehaviour
                 jumps--;
                 isJumping = true;
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                JumpEvent.Invoke();
             }
         }
     }
@@ -233,6 +233,7 @@ public class BaseCharacter : MonoBehaviour
     {
         isDashing = true;
         dashDirection = direction;
+        playerCollider.gameObject.layer = LayerMask.NameToLayer("PlayerInvulnerable");
         StartCoroutine(DashCoroutine());
     }
 
@@ -258,6 +259,7 @@ public class BaseCharacter : MonoBehaviour
         }
 
         isDashing = false;
+        playerCollider.gameObject.layer = LayerMask.NameToLayer("Default");
     }
 
 
@@ -385,7 +387,7 @@ public class BaseCharacter : MonoBehaviour
      public void StunPlayer(){
         isStunned = true;
         rb.AddForce(new Vector2(200 * -transform.localScale.x, 0));
-        Invoke("StopStunningPlayer", 0.3f);
+        Invoke("StopStunningPlayer", stunTime);
      }
 
      public void StopStunningPlayer(){
