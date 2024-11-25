@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +14,10 @@ public class GameController : MonoBehaviour
     // Win screen images
     public Image player1WinImage;
     public Image player2WinImage;
+
+    // Game Over screen
+    public GameObject gameOverPanel;    // Panel for the Game Over screen
+    public Text gameOverText;           // Optional: Text displayed on the Game Over screen
 
     private bool gameEnded = false;
 
@@ -75,5 +78,34 @@ public class GameController : MonoBehaviour
             player1WinImage.enabled = false;
             player2WinImage.enabled = true;
         }
+
+        // Start the coroutine to show the Game Over screen
+        StartCoroutine(ShowGameOverScreenAfterDelay());
+    }
+
+    IEnumerator ShowGameOverScreenAfterDelay()
+    {
+        // Wait for 15 seconds
+        yield return new WaitForSeconds(15f);
+
+        // Hide the win screens
+        player1WinImage.enabled = false;
+        player2WinImage.enabled = false;
+
+        // Display the Game Over panel
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(true);
+        }
+
+        // Optional: Update Game Over text
+        if (gameOverText != null)
+        {
+            gameOverText.text = "Game Over";
+        }
     }
 }
+
+
+
+
