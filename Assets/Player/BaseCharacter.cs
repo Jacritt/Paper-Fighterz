@@ -5,48 +5,51 @@ using UnityEngine.Events;
 
 public class BaseCharacter : MonoBehaviour
 {
-    // Movement Variables
-    [Header("Movement")]
+    [Header("Setup")]
+    public string characterName = "";  // Name of the character
     public float moveSpeed = 5f;       // Speed of movement
-    public float horizontalInput;      // Input for horizontal movement
-    public bool isWalking = false;
+    public float attackDamage = 10;
     public float dashDuration = 0.5f;   // How long the dash lasts
     public float dashDistance = 2f;
+    public float jumpForce = 15f;       // Force of the jump
+    public int jumps = 2;
+    public float groundCheckRadius = 1f; // Radius of ground check
+    public float stunTime = 0.3f;
+
+    [Header("AttackDurations")]
+    public float N_ATTACK_cooldownTime = 0.5f;   // Time in seconds before you can attack again
+    public float N_ATTACK_lastAttackTime = 0f;  // Time when the last attack occurred
+
+    public float UP_ATTACK_cooldownTime = 0.5f;   // Time in seconds before you can attack again
+    public float UP_ATTACK_lastAttackTime = 0f;  // Time when the last attack occurred
+
+    public float DOWN_ATTACK_cooldownTime = 0.5f;   // Time in seconds before you can attack again
+    public float DOWN_ATTACK_lastAttackTime = 0f;  // Time when the last attack occurred
+
+
+    // Walking & Attacking
+    [Header("Other")]
+    public bool isAttacking = false;   // Whether the player is attacking
+    public bool canAttack = true;      // Whether the player can attack
+    public float attackTimer = 0f;     // Timer to track attack cooldown
+    public bool isGrounded = false;    // Whether the player is on the ground
+    public bool isPlayer1;
+    public Transform otherPlayerTransform;
+    public bool isDead = false;
+
+
+    // PRIVATE VARIABLES
+    private bool isWalking = false;
+    private bool isJumping = false;    // Whether the player is currently jumping
     private bool isDashing = false;     // Whether the player is dashing 
     private Vector2 dashDirection;  // Direction of the dash
     private float lastTapTime; 
     private float tapDelay = 0.3f; 
-
-
-    // Jumping Variables
-    [Header("Jumping")]
-    public float jumpForce = 15f;       // Force of the jump
-    private bool isJumping = false;    // Whether the player is currently jumping
-    public int jumps = 2;
-    public bool isGrounded = false;    // Whether the player is on the ground
-    public LayerMask groundLayer;      // Layer to check for the ground
-    public float groundCheckRadius = 1f; // Radius of ground check
-
-
-    // Walking & Attacking
-    [Header("Attacking")]
-    public float attackDamage = 10;
-    public bool isAttacking = false;   // Whether the player is attacking
-    public bool canAttack = true;      // Whether the player can attack
-    public float attackTimer = 0f;     // Timer to track attack cooldown
-    public CircleCollider2D hitbox;
-
-
-    // Player Info
-    [Header("Player Info")]
-    public string characterName = "";  // Name of the character
-    public bool isPlayer1;
-    public string currentState = "";   // Current animation state
-    public Transform otherPlayerTransform;
-    public bool isDead = false;
-    public bool isStunned = false;
-    public Collider2D playerCollider;
-    public float stunTime = 0.3f;
+    private bool isStunned = false;
+    private CircleCollider2D hitbox;
+    private Collider2D playerCollider;
+    private string currentState = "";   // Current animation state
+    private LayerMask groundLayer;  
 
     // Components
     private Rigidbody2D rb;            // Rigidbody component for physics
@@ -127,6 +130,7 @@ public class BaseCharacter : MonoBehaviour
 
     private void HandleMovement()
     {
+        float horizontalInput;
         if (isPlayer1){
             if (Input.GetKey(KeyCode.A)){
                 horizontalInput = -1;
@@ -271,19 +275,22 @@ public class BaseCharacter : MonoBehaviour
         if (isPlayer1){
             if (Input.GetKey(KeyCode.Space))
             {
-                if (Input.GetKey(KeyCode.W))
+                if (Input.GetKey(KeyCode.W) && Can_UP_Attack())
                 {
                     // Up attack (W + Space)
+                    UP_ATTACK_lastAttackTime = Time.time;
                     UpAttack();
                 }
-                else if (Input.GetKey(KeyCode.S))
+                else if (Input.GetKey(KeyCode.S) && Can_DOWN_Attack())
                 {
                     // Down attack (S + Space)
+                    DOWN_ATTACK_lastAttackTime = Time.time;
                     DownAttack();
                 }
-                else
+                else if(Can_N_Attack() && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) )
                 {
                     // Normal attack (Space)
+                    N_ATTACK_lastAttackTime = Time.time;
                     NormalAttack();
                 }
             }
@@ -291,17 +298,17 @@ public class BaseCharacter : MonoBehaviour
         else{
             if (Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.RightShift))
             {
-                if (Input.GetKey(KeyCode.UpArrow))
+                if (Input.GetKey(KeyCode.UpArrow) && Can_UP_Attack())
                 {
                     // Up attack (W + Space)
                     UpAttack();
                 }
-                else if (Input.GetKey(KeyCode.DownArrow))
+                else if (Input.GetKey(KeyCode.DownArrow) && Can_DOWN_Attack())
                 {
                     // Down attack (S + Space)
                     DownAttack();
                 }
-                else
+                else if(Can_N_Attack())
                 {
                     // Normal attack (Space)
                     NormalAttack();
@@ -394,6 +401,17 @@ public class BaseCharacter : MonoBehaviour
         isStunned = false;
      }
 
-        
     
+    bool Can_N_Attack()
+    {
+        return Time.time >= N_ATTACK_lastAttackTime + N_ATTACK_cooldownTime;
+    }
+    bool Can_UP_Attack()
+    {
+        return Time.time >= UP_ATTACK_lastAttackTime + UP_ATTACK_cooldownTime;
+    }
+    bool Can_DOWN_Attack()
+    {
+        return Time.time >= DOWN_ATTACK_lastAttackTime + DOWN_ATTACK_cooldownTime;
+    }
 }
