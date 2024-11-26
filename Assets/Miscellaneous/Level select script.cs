@@ -20,11 +20,9 @@ public class Levelselectscript : MonoBehaviour
     public TextMeshProUGUI backgroundNameText;
     public int maxSlots;
     public int p1_Current_Slot = 0;
-    public GameObject backgroundCharacter;
+    public GameObject stageBackground;
     public AudioSource bgmusic;
     public bool isP1Selected = false;
-    public UnityEvent P1Selected_Event;
-    public UnityEvent P1Unselected_Event;
     
 
 
@@ -42,7 +40,6 @@ public class Levelselectscript : MonoBehaviour
         }
 
         GameManager.gameManager.background_prefab = null;
-        GameManager.gameManager.musicSource = null;
     }
 
     void Update()
@@ -50,9 +47,7 @@ public class Levelselectscript : MonoBehaviour
         if (isP1Selected)
         {
             //isP1Selected = false;
-            GameManager.gameManager.background_prefab = backgroundCharacter;
-            GameManager.gameManager.musicSource = bgmusic;
-            MusicManager.musicManager.PlayMusic();
+            GameManager.gameManager.background_prefab = stageBackground;
             Invoke("LoadStageScene", 0);
             print("LoadNewScene");
         }
@@ -65,6 +60,7 @@ public class Levelselectscript : MonoBehaviour
 
     public void LoadStageScene(){
         isP1Selected = false;
+        MusicManager.musicManager.PlayMusic(slots[p1_Current_Slot].GetComponent<SlotStage>().stageMusic);
         SceneManager.LoadScene("SampleScene");
     }
 
@@ -102,14 +98,14 @@ public class Levelselectscript : MonoBehaviour
             if (isP1Selected)
             {
                 isP1Selected = false;
-                backgroundCharacter = null;
-                P1Unselected_Event.Invoke();
+                stageBackground = null;
+                //P1Unselected_Event.Invoke();
             }
             else
             {
-                backgroundCharacter = slots[p1_Current_Slot].GetComponent<SlotCharacterData>().characterPrefab;
+                stageBackground = slots[p1_Current_Slot].GetComponent<SlotStage>().stagePrefab;
                 isP1Selected = true;
-                P1Selected_Event.Invoke();
+                //P1Selected_Event.Invoke();
             }
         }
     }
@@ -124,7 +120,7 @@ public class Levelselectscript : MonoBehaviour
             }
             else if (slots.IndexOf(slot) == p1_Current_Slot)
             {
-                slots[p1_Current_Slot].GetComponent<Image>().color = Color.red;
+                slots[p1_Current_Slot].GetComponent<Image>().color = Color.blue;
             }
 
         }
@@ -132,10 +128,10 @@ public class Levelselectscript : MonoBehaviour
 
     public void HandleCharacterDisplay()
     {
-        backgroundImage.sprite = slots[p1_Current_Slot].GetComponent<SlotCharacterData>().characterIcon;
+        backgroundImage.sprite = slots[p1_Current_Slot].GetComponent<SlotStage>().stageIcon;
 
 
-        backgroundNameText.text = slots[p1_Current_Slot].GetComponent<SlotCharacterData>().characterName;
+        backgroundNameText.text = slots[p1_Current_Slot].GetComponent<SlotStage>().stageName;
 
     }
 

@@ -147,10 +147,10 @@ public class CharacterSelect : MonoBehaviour
                 slots[p2_Current_Slot].GetComponent<Image>().color = Color.magenta;
             }
             else if(slots.IndexOf(slot) == p1_Current_Slot){
-                slots[p1_Current_Slot].GetComponent<Image>().color = Color.red;
+                slots[p1_Current_Slot].GetComponent<Image>().color = new Color(0, 216, 230, 255); //Color.blue;
             }
             else if(slots.IndexOf(slot) == p2_Current_Slot){
-                slots[p2_Current_Slot].GetComponent<Image>().color = Color.blue;
+                slots[p2_Current_Slot].GetComponent<Image>().color =  Color.red;
             }
         
         }
