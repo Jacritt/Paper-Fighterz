@@ -433,7 +433,7 @@ MonoBehaviour:
   stageName: Crystal Cave
   stagePrefab: {fileID: 2077956190216324375, guid: 124943886568a924cacd729c3f88929f, type: 3}
   stageIcon: {fileID: 21300000, guid: b9f0faf5cc1f49d43a3b61b0486a3446, type: 3}
-  stageMusic: {fileID: 0}
+  stageMusic: {fileID: 8300000, guid: 1ed524e69f1fd6c4bb27285de1024870, type: 3}
 --- !u!1 &47402662
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,7 +948,7 @@ MonoBehaviour:
   stageName: Heaven's Grove
   stagePrefab: {fileID: 3762943037723241991, guid: 6ff2758725f0b5241bd218c8ceb14a71, type: 3}
   stageIcon: {fileID: 21300000, guid: f048f757b9ee7bb4dabec5cbe1cbef6a, type: 3}
-  stageMusic: {fileID: 0}
+  stageMusic: {fileID: 8300000, guid: 3f671c39e9d7cb547b33114b19f9d250, type: 3}
 --- !u!1 &265670606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,7 +1042,7 @@ MonoBehaviour:
   stageName: an Airport
   stagePrefab: {fileID: 520903119119316874, guid: cca46ae9b7f74054eb125fad60c387e7, type: 3}
   stageIcon: {fileID: 21300000, guid: 15b662255b7ec2448a5e539c922bdcc1, type: 3}
-  stageMusic: {fileID: 0}
+  stageMusic: {fileID: 8300000, guid: 0540aa0d7ef8847498e2249fbb55e239, type: 3}
 --- !u!1 &281044627
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,7 +1647,7 @@ MonoBehaviour:
   stageName: The Falls
   stagePrefab: {fileID: 1251990703316846318, guid: 6223120878f6b23408e15bd444a3d3ed, type: 3}
   stageIcon: {fileID: 21300000, guid: bb4427513c34bdc479662b396a7ad2a0, type: 3}
-  stageMusic: {fileID: 0}
+  stageMusic: {fileID: 8300000, guid: 203b5481db01cb94c9794aa771df453f, type: 3}
 --- !u!1 &521733414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1833,7 +1833,7 @@ MonoBehaviour:
   stageName: Matrix
   stagePrefab: {fileID: 4846004705460336759, guid: ce5e643c093136f419a3d90f1fa41f43, type: 3}
   stageIcon: {fileID: 21300000, guid: 52a79d1e774adbf46a55584a8694a599, type: 3}
-  stageMusic: {fileID: 0}
+  stageMusic: {fileID: 8300000, guid: 485571565141a4e43834744758e7f1fe, type: 3}
 --- !u!1 &603240301
 GameObject:
   m_ObjectHideFlags: 0
@@ -2012,7 +2012,7 @@ MonoBehaviour:
   stageName: Champion's Ring
   stagePrefab: {fileID: 3687000596398828862, guid: 92673e4d45403534f8cc475e08c4c08c, type: 3}
   stageIcon: {fileID: 21300000, guid: 2a0e6ece546fc1a4398f1537a8d60987, type: 3}
-  stageMusic: {fileID: 0}
+  stageMusic: {fileID: 8300000, guid: 5474bdcb52a113b4790d9535e78340a1, type: 3}
 --- !u!1 &687329514
 GameObject:
   m_ObjectHideFlags: 0
@@ -2459,7 +2459,7 @@ MonoBehaviour:
   stageName: Burned Village
   stagePrefab: {fileID: 1763937764724459209, guid: 4ca11c08b98a3a045a98e3af533bec8d, type: 3}
   stageIcon: {fileID: 21300000, guid: 8dabef652e268884e8591062f85f2033, type: 3}
-  stageMusic: {fileID: 0}
+  stageMusic: {fileID: 8300000, guid: 3d3a7bdbb18874b4fa04b801f49cc959, type: 3}
 --- !u!1 &766403773
 GameObject:
   m_ObjectHideFlags: 0
@@ -2553,7 +2553,7 @@ MonoBehaviour:
   stageName: Someone's Backyard
   stagePrefab: {fileID: 7633659173794819209, guid: 52c39e6dea8918640886bd696bbb281e, type: 3}
   stageIcon: {fileID: 21300000, guid: 2074b703dd40693458cb726fddd0c7b8, type: 3}
-  stageMusic: {fileID: 0}
+  stageMusic: {fileID: 8300000, guid: 76a2279818f0fe04288a2108ae5f45c1, type: 3}
 --- !u!1 &800551970
 GameObject:
   m_ObjectHideFlags: 0
@@ -2776,7 +2776,7 @@ MonoBehaviour:
   stageName: Unclaimed Throne
   stagePrefab: {fileID: 4701284866970866638, guid: 5cf7f9d96d3c85849b5f6ae276e5b43d, type: 3}
   stageIcon: {fileID: 21300000, guid: e6d8c981ca9dd974aa9d1f4bf73b66a7, type: 3}
-  stageMusic: {fileID: 0}
+  stageMusic: {fileID: 8300000, guid: 88106ed9e494b3c41b94add39f1ad522, type: 3}
 --- !u!1 &953129255
 GameObject:
   m_ObjectHideFlags: 0
@@ -3004,7 +3004,7 @@ MonoBehaviour:
   stageName: Ohio 2176
   stagePrefab: {fileID: 5929919355037031390, guid: 6b4629a68611a3c44ac482f60606c50c, type: 3}
   stageIcon: {fileID: 21300000, guid: 7588e1493ec3957439cf99401d038ea4, type: 3}
-  stageMusic: {fileID: 0}
+  stageMusic: {fileID: 8300000, guid: 667b8ec5ce66aff44bfc4a3f42bb0e56, type: 3}
 --- !u!1 &973265812
 GameObject:
   m_ObjectHideFlags: 0
@@ -3248,7 +3248,7 @@ MonoBehaviour:
   stageName: Everegreen
   stagePrefab: {fileID: 8988715354820556011, guid: 585eaf720f0ee714cb3dc8f3de4441bf, type: 3}
   stageIcon: {fileID: 21300000, guid: a1eeabbb35ce11244808f26597fb3b41, type: 3}
-  stageMusic: {fileID: 0}
+  stageMusic: {fileID: 8300000, guid: 77fb500ce18379a40967142724b24baa, type: 3}
 --- !u!1 &1087078255
 GameObject:
   m_ObjectHideFlags: 0
@@ -3717,7 +3717,7 @@ MonoBehaviour:
   stageName: Meosjin Market
   stagePrefab: {fileID: 1474092861508360838, guid: 1ba7fd89b94c67e4999329e3a0ee57ee, type: 3}
   stageIcon: {fileID: 21300000, guid: 8e392d0bd41f6494b986b46430726430, type: 3}
-  stageMusic: {fileID: 0}
+  stageMusic: {fileID: 8300000, guid: ae4e7c2c65d42cc41a0b787771ff3ef1, type: 3}
 --- !u!1 &1307933006
 GameObject:
   m_ObjectHideFlags: 0
@@ -3811,7 +3811,7 @@ MonoBehaviour:
   stageName: The Shift
   stagePrefab: {fileID: 6780616631475458598, guid: 45be0fe425102fb46b140549d584660c, type: 3}
   stageIcon: {fileID: 21300000, guid: 3b580a2fc8973cc4abf102365ac62754, type: 3}
-  stageMusic: {fileID: 0}
+  stageMusic: {fileID: 8300000, guid: 542d00a250a00504cb51375ec45bf7fb, type: 3}
 --- !u!1 &1310621113
 GameObject:
   m_ObjectHideFlags: 0
@@ -3905,7 +3905,7 @@ MonoBehaviour:
   stageName: Rocky Beach
   stagePrefab: {fileID: 1933177237809128117, guid: adf9b4d1f0544ff4b85fe64d534eb337, type: 3}
   stageIcon: {fileID: 21300000, guid: 2fce220b530f53848a72e37ef8751813, type: 3}
-  stageMusic: {fileID: 0}
+  stageMusic: {fileID: 8300000, guid: 9fda7ce9704cb2248a167b5f7af7e2df, type: 3}
 --- !u!1 &1391964982
 GameObject:
   m_ObjectHideFlags: 0
@@ -4773,7 +4773,7 @@ MonoBehaviour:
   stageName: Abandoned Factory
   stagePrefab: {fileID: 1565345703499847499, guid: e980cf2bd7354d445bd8bbd93b0d1700, type: 3}
   stageIcon: {fileID: 21300000, guid: 6588bc3e5847fd54dabbcc4f6dafe85b, type: 3}
-  stageMusic: {fileID: 0}
+  stageMusic: {fileID: 8300000, guid: 774444a36ee9ac942886c5250743e20b, type: 3}
 --- !u!1 &1881166147
 GameObject:
   m_ObjectHideFlags: 0
