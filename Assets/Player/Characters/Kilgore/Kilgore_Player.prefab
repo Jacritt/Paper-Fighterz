@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 3774983863230842688}
   - component: {fileID: 4909325325450941448}
   - component: {fileID: 4749041339480910420}
-  - component: {fileID: 64015159442590770}
+  - component: {fileID: 2826393824264857193}
   - component: {fileID: 4041540331740682200}
   m_Layer: 0
   m_Name: Kilgore_Player
@@ -197,7 +197,7 @@ MonoBehaviour:
   maxHealth: 130
   currentHealth: 0
   healthBar: {fileID: 0}
---- !u!114 &64015159442590770
+--- !u!114 &2826393824264857193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,34 +206,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 4450039032044334443}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fa97c9859f50f046a8b5254900072dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e2538368b217b5418e6d94591049df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Kilgore
   moveSpeed: 4
-  horizontalInput: 0
-  isWalking: 0
+  attackDamage: 13
   dashDuration: 0.2
   dashDistance: 2
   jumpForce: 14
   jumps: 2
-  isGrounded: 0
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
   groundCheckRadius: 1.8
-  attackDamage: 13
+  stunTime: 0.08
+  N_ATTACK_cooldownTime: 0.5
+  N_ATTACK_lastAttackTime: 0
+  UP_ATTACK_cooldownTime: 0.5
+  UP_ATTACK_lastAttackTime: 0
+  DOWN_ATTACK_cooldownTime: 0.5
+  DOWN_ATTACK_lastAttackTime: 0
   isAttacking: 0
   canAttack: 1
   attackTimer: 0
-  hitbox: {fileID: 0}
-  characterName: 
+  isGrounded: 0
   isPlayer1: 0
-  currentState: 
   otherPlayerTransform: {fileID: 0}
   isDead: 0
-  isStunned: 0
-  playerCollider: {fileID: 0}
-  stunTime: 0.08
+  cooldownDisplay: {fileID: 0}
+  up_cd: {fileID: 0}
+  down_cd: {fileID: 0}
+  normal_cd: {fileID: 0}
+  dash_cd: {fileID: 0}
 --- !u!95 &4041540331740682200
 Animator:
   serializedVersion: 5

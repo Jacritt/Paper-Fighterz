@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class BaseCharacter : MonoBehaviour
 {
@@ -37,6 +38,12 @@ public class BaseCharacter : MonoBehaviour
     public Transform otherPlayerTransform;
     public bool isDead = false;
 
+    [SerializeField] private GameObject cooldownDisplay;
+    [SerializeField] private GameObject up_cd;
+    [SerializeField] private GameObject down_cd;
+    [SerializeField] private GameObject normal_cd;
+    [SerializeField] private GameObject dash_cd;
+
 
     // PRIVATE VARIABLES
     private bool isWalking = false;
@@ -48,8 +55,9 @@ public class BaseCharacter : MonoBehaviour
     private bool isStunned = false;
     private CircleCollider2D hitbox;
     private Collider2D playerCollider;
-    private string currentState = "";   // Current animation state
+    [SerializeField] private string currentState = "";   // Current animation state
     private LayerMask groundLayer;  
+
 
     // Components
     private Rigidbody2D rb;            // Rigidbody component for physics
@@ -65,10 +73,26 @@ public class BaseCharacter : MonoBehaviour
         groundLayer = LayerMask.GetMask("groundLayer");
         hitbox = GetComponentInChildren<CircleCollider2D>();
         playerCollider = GetComponent<Collider2D>();
+
+        if (isPlayer1) { 
+            cooldownDisplay = GameObject.FindWithTag("Player1Cooldowns"); 
+        }
+        else{
+            cooldownDisplay = GameObject.FindWithTag("Player2Cooldowns"); 
+        }
+
+        up_cd = cooldownDisplay.transform.GetChild(0).gameObject;
+        down_cd = cooldownDisplay.transform.GetChild(1).gameObject;
+        normal_cd = cooldownDisplay.transform.GetChild(2).gameObject;
+        dash_cd = cooldownDisplay.transform.GetChild(3).gameObject;
+        
+
     }
 
     void Update()
     {
+        UpdateCooldownDisplay();
+
         if (isDead){ChangeAnimationState("DEAD");return;}
         if (isStunned){ChangeAnimationState("STUN");return;}
 
@@ -141,8 +165,8 @@ public class BaseCharacter : MonoBehaviour
             else{
                 horizontalInput = 0;
             }
-            rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
-            isWalking = Mathf.Abs(horizontalInput) > 0 && isGrounded;
+            // rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
+            // isWalking = Mathf.Abs(horizontalInput) > 0 && isGrounded;
         }
         else{
             if (Input.GetKey(KeyCode.LeftArrow)){
@@ -301,16 +325,19 @@ public class BaseCharacter : MonoBehaviour
                 if (Input.GetKey(KeyCode.UpArrow) && Can_UP_Attack())
                 {
                     // Up attack (W + Space)
+                    UP_ATTACK_lastAttackTime = Time.time;
                     UpAttack();
                 }
                 else if (Input.GetKey(KeyCode.DownArrow) && Can_DOWN_Attack())
                 {
                     // Down attack (S + Space)
+                    DOWN_ATTACK_lastAttackTime = Time.time;
                     DownAttack();
                 }
-                else if(Can_N_Attack())
+                else if(Can_N_Attack() && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow))
                 {
                     // Normal attack (Space)
+                    N_ATTACK_lastAttackTime = Time.time;
                     NormalAttack();
                 }
             }
@@ -402,6 +429,22 @@ public class BaseCharacter : MonoBehaviour
      }
 
     
+    public void UpdateCooldownDisplay(){
+        float UP_cooldownProgress = (Time.time - UP_ATTACK_lastAttackTime) / UP_ATTACK_cooldownTime;
+        up_cd.transform.GetChild(0).gameObject.GetComponent<Image>().fillAmount = UP_cooldownProgress;
+        
+
+        float DOWN_cooldownProgress = (Time.time - DOWN_ATTACK_lastAttackTime) / DOWN_ATTACK_cooldownTime;
+        down_cd.transform.GetChild(0).gameObject.GetComponent<Image>().fillAmount = DOWN_cooldownProgress;
+
+        float N_cooldownProgress = (Time.time - N_ATTACK_lastAttackTime) / N_ATTACK_cooldownTime;
+        normal_cd.transform.GetChild(0).gameObject.GetComponent<Image>().fillAmount = N_cooldownProgress;
+        if (!isPlayer1){
+            print(N_cooldownProgress);
+        }
+    }
+
+
     bool Can_N_Attack()
     {
         return Time.time >= N_ATTACK_lastAttackTime + N_ATTACK_cooldownTime;

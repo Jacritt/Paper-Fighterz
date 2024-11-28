@@ -9,6 +9,8 @@ TagManager:
   - Player2
   - Player1HealthBar
   - Player2HealthBar
+  - Player1Cooldowns
+  - Player2Cooldowns
   layers:
   - Default
   - TransparentFX
