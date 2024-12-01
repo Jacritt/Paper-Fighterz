@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -121,7 +122,7 @@ public class BaseCharacter : MonoBehaviour
         }
     }
 
-    void ChangeAnimationState(string newState)
+    public void ChangeAnimationState(string newState)
     {
         if (currentState == newState) return;
 
@@ -362,7 +363,7 @@ public class BaseCharacter : MonoBehaviour
         attackTimer = GetAttackAnimationDuration();
     }
 
-    private void DownAttack()
+    public virtual void DownAttack()
     {
         Debug.Log("Performing Down Attack");
         ChangeAnimationState("DOWN_ATTACK");
@@ -372,7 +373,7 @@ public class BaseCharacter : MonoBehaviour
     }
 
     // Method to get the duration of the current attack animation
-    private float GetAttackAnimationDuration()
+    public float GetAttackAnimationDuration()
     {
         
         return 0.5f; // Fallback cooldown if animation is not found
@@ -439,9 +440,6 @@ public class BaseCharacter : MonoBehaviour
 
         float N_cooldownProgress = (Time.time - N_ATTACK_lastAttackTime) / N_ATTACK_cooldownTime;
         normal_cd.transform.GetChild(0).gameObject.GetComponent<Image>().fillAmount = N_cooldownProgress;
-        if (!isPlayer1){
-            print(N_cooldownProgress);
-        }
     }
 
 

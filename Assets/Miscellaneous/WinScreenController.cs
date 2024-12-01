@@ -18,14 +18,21 @@ public class GameController : MonoBehaviour
     // Game Over screen
     public GameObject gameOverPanel;    // Panel for the Game Over screen
     public Text gameOverText;           // Optional: Text displayed on the Game Over screen
+    public GameObject matchOverScreen;
+    public GameObject gamePlayScreen;
 
     private bool gameEnded = false;
 
     void Update()
     {
+
         if (!gameEnded)
         {
             CheckHealth();
+        }
+        else{
+            if (GameManager.gameManager.p1WinsNum >= 2){MatchOver();}
+            if (GameManager.gameManager.p2WinsNum >= 2){MatchOver();}
         }
     }
 
@@ -67,16 +74,18 @@ public class GameController : MonoBehaviour
     void ShowWinScreen(int winningPlayer)
     {
         gameEnded = true;
-
+        
         if (winningPlayer == 1)
         {
             player1WinImage.enabled = true;
             player2WinImage.enabled = false;
+            GameManager.gameManager.p1WinsNum++;
         }
         else if (winningPlayer == 2)
         {
             player1WinImage.enabled = false;
             player2WinImage.enabled = true;
+            GameManager.gameManager.p2WinsNum++;
         }
 
         // Start the coroutine to show the Game Over screen
@@ -86,7 +95,7 @@ public class GameController : MonoBehaviour
     IEnumerator ShowGameOverScreenAfterDelay()
     {
         // Wait for 15 seconds
-        yield return new WaitForSeconds(15f);
+        yield return new WaitForSeconds(3f);
 
         // Hide the win screens
         player1WinImage.enabled = false;
@@ -103,6 +112,11 @@ public class GameController : MonoBehaviour
         {
             gameOverText.text = "Game Over";
         }
+    }
+
+    public void MatchOver(){
+        matchOverScreen.SetActive(true);
+        gamePlayScreen.SetActive(false);
     }
 }
 

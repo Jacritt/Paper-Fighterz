@@ -88,6 +88,6 @@ public class HealthManager : MonoBehaviour
     }
 
     public void StartNextRound(){
-        GameManager.gameManager.RestartMatch();
+        GameManager.gameManager.StartNextRound();
     }
 }

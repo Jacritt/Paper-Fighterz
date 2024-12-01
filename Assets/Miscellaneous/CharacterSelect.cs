@@ -29,6 +29,7 @@ public class CharacterSelect : MonoBehaviour
     public UnityEvent P2Unselected_Event;
 
     [Header("Audio")]
+    public AudioClip cs_backgroundMusic;
     public AudioClip switch_AC;
 
     public List<GameObject> slots;
@@ -43,6 +44,8 @@ public class CharacterSelect : MonoBehaviour
 
         GameManager.gameManager.p1_character_prefab = null;
         GameManager.gameManager.p2_character_prefab = null;
+
+        MusicManager.musicManager.PlayMusic(cs_backgroundMusic);
     }
 
     // Update is called once per frame
