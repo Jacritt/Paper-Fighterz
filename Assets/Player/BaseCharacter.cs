@@ -41,6 +41,7 @@ public class BaseCharacter : MonoBehaviour
 
     [Header("SoundFX")]
     public AudioClip jumpSound;
+    public AudioClip deathSound;
 
     [SerializeField] private GameObject cooldownDisplay;
     [SerializeField] private GameObject up_cd;
@@ -212,6 +213,7 @@ public class BaseCharacter : MonoBehaviour
                 jumps--;
                 isJumping = true;
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                SoundFXManager.soundFXManager.PlaySoundEffect(jumpSound);
             }
         }
     }

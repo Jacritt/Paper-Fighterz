@@ -311,6 +311,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 42a442434b009da4188003f7e6d0ff60, type: 3}
 --- !u!114 &8751524927278837940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,6 +347,7 @@ MonoBehaviour:
   otherPlayerTransform: {fileID: 0}
   isDead: 0
   jumpSound: {fileID: 8300000, guid: e8823aa8182864a43bcb0efee6180390, type: 3}
+  deathSound: {fileID: 8300000, guid: 64eb14f05776ef04a95e9a5f6815d07d, type: 3}
   cooldownDisplay: {fileID: 0}
   up_cd: {fileID: 0}
   down_cd: {fileID: 0}

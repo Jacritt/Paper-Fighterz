@@ -50,7 +50,7 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 4116468684377483328, guid: 4aea48066df202f4c90366495b1a66af, type: 3}
+      value: {fileID: 3720052778940339550, guid: 39a2784e63b2dbe43ab2ca1841a974f0, type: 3}
     attribute: projectilePrefab
     path: 
     classID: 114
@@ -94,7 +94,7 @@ AnimationClip:
     - {fileID: 21300000, guid: 68cd7096b05fd9f4ebb804f7ad231a42, type: 3}
     - {fileID: 21300000, guid: fadf8df6ba7323342a0f7cc6bf03435d, type: 3}
     - {fileID: 21300000, guid: fadf8df6ba7323342a0f7cc6bf03435d, type: 3}
-    - {fileID: 4116468684377483328, guid: 4aea48066df202f4c90366495b1a66af, type: 3}
+    - {fileID: 3720052778940339550, guid: 39a2784e63b2dbe43ab2ca1841a974f0, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

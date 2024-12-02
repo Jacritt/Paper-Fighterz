@@ -10,6 +10,7 @@ public class HealthManager : MonoBehaviour
     public float maxHealth = 100; // Maximum health
     public float currentHealth; // Current health
     public Slider healthBar; // Reference to UI Text for displaying health
+    public AudioClip hitSound;
 
     private BaseCharacter baseCharacter;
 
@@ -44,6 +45,7 @@ public class HealthManager : MonoBehaviour
     // Method to take damage
     public void TakeDamage(float damageAmount)
     {
+        SoundFXManager.soundFXManager.PlaySoundEffect(hitSound);
         currentHealth -= damageAmount; // Decrease current health
         if (currentHealth <= 0) // Clamp to zero
         {
@@ -77,6 +79,7 @@ public class HealthManager : MonoBehaviour
     }
 
     private void PlayerLose(){
+        SoundFXManager.soundFXManager.PlaySoundEffect(baseCharacter.deathSound);
         if (gameObject.tag == "Player1"){
             print("Player 2 WINS!");
         }

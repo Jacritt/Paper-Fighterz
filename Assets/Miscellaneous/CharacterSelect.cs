@@ -77,13 +77,13 @@ public class CharacterSelect : MonoBehaviour
             SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
         }
         if(Input.GetKeyDown(KeyCode.W) && !isP1Selected){
-            if (p1_Current_Slot-5 < 0){return;}
-            p1_Current_Slot = p1_Current_Slot-5;
+            if (p1_Current_Slot-3 < 0){return;}
+            p1_Current_Slot = p1_Current_Slot-3;
             SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
         }
         if(Input.GetKeyDown(KeyCode.S) && !isP1Selected){
-            if (p1_Current_Slot+5 > maxSlots-1){return;}
-            p1_Current_Slot = p1_Current_Slot+5;
+            if (p1_Current_Slot+3 > maxSlots-1){return;}
+            p1_Current_Slot = p1_Current_Slot+3;
             SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
         }
         if(Input.GetKeyDown(KeyCode.Space)){
@@ -115,13 +115,13 @@ public class CharacterSelect : MonoBehaviour
             SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
         }
         if(Input.GetKeyDown(KeyCode.UpArrow) && !isP2Selected){
-            if (p2_Current_Slot-5 < 0){return;}
-            p2_Current_Slot = p2_Current_Slot-5;
+            if (p2_Current_Slot-3 < 0){return;}
+            p2_Current_Slot = p2_Current_Slot-3;
             SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
         }
         if(Input.GetKeyDown(KeyCode.DownArrow) && !isP2Selected){
-            if (p2_Current_Slot+5 > maxSlots-1){return;}
-            p2_Current_Slot = p2_Current_Slot+5;
+            if (p2_Current_Slot+3 > maxSlots-1){return;}
+            p2_Current_Slot = p2_Current_Slot+3;
             SoundFXManager.soundFXManager.PlaySoundEffect(switch_AC);
         }
         if(Input.GetKeyDown(KeyCode.RightControl) || Input.GetKeyDown(KeyCode.RightShift)){

@@ -197,6 +197,7 @@ MonoBehaviour:
   maxHealth: 130
   currentHealth: 0
   healthBar: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 42a442434b009da4188003f7e6d0ff60, type: 3}
 --- !u!114 &2826393824264857193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,11 +232,14 @@ MonoBehaviour:
   isPlayer1: 0
   otherPlayerTransform: {fileID: 0}
   isDead: 0
+  jumpSound: {fileID: 8300000, guid: 07a480b1b4639a74c9bf96005eb5d1e7, type: 3}
+  deathSound: {fileID: 8300000, guid: 0b23a140d228edb42b2c542c5ea4e49d, type: 3}
   cooldownDisplay: {fileID: 0}
   up_cd: {fileID: 0}
   down_cd: {fileID: 0}
   normal_cd: {fileID: 0}
   dash_cd: {fileID: 0}
+  currentState: 
 --- !u!95 &4041540331740682200
 Animator:
   serializedVersion: 5

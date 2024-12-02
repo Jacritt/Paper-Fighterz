@@ -1224,7 +1224,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -340}
-  m_SizeDelta: {x: 790, y: 310.67}
+  m_SizeDelta: {x: 476.12, y: 310.67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &748470316
 MonoBehaviour:
@@ -2385,6 +2385,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundFXObject: {fileID: 4161311871495775023, guid: 2633ac8aed297514ba79e906db78e070, type: 3}
+  minPitch: 0.8
+  maxPitch: 1.2
 --- !u!4 &1695681312
 Transform:
   m_ObjectHideFlags: 0
