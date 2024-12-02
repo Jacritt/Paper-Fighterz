@@ -1041,7 +1041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673ac20b25481ce459dfa117f7c2d6f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageName: VA Flight 180
+  stageName: an Airport
   stagePrefab: {fileID: 520903119119316874, guid: cca46ae9b7f74054eb125fad60c387e7, type: 3}
   stageIcon: {fileID: 21300000, guid: 15b662255b7ec2448a5e539c922bdcc1, type: 3}
   stageMusic: {fileID: 8300000, guid: 0540aa0d7ef8847498e2249fbb55e239, type: 3}
@@ -2606,7 +2606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673ac20b25481ce459dfa117f7c2d6f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageName: Devonte's Wrath
+  stageName: Burned Village
   stagePrefab: {fileID: 1763937764724459209, guid: 4ca11c08b98a3a045a98e3af533bec8d, type: 3}
   stageIcon: {fileID: 21300000, guid: 8dabef652e268884e8591062f85f2033, type: 3}
   stageMusic: {fileID: 8300000, guid: 3d3a7bdbb18874b4fa04b801f49cc959, type: 3}
