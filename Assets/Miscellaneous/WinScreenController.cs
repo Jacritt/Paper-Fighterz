@@ -1,125 +1,126 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour
+public class WinScreenController : MonoBehaviour
 {
-    // Reference to Player 1 and Player 2 health bars
-    public Slider player1HealthSlider;  // Use this if your health bar is a Slider
-    public Slider player2HealthSlider;  // Use this if your health bar is a Slider
-
-    public Image player1HealthImage;    // Use this if your health bar is an Image
-    public Image player2HealthImage;    // Use this if your health bar is an Image
+    // References to health bars
+    public Slider player1HealthSlider;
+    public Slider player2HealthSlider;
 
     // Win screen images
     public Image player1WinImage;
     public Image player2WinImage;
 
-    // Game Over screen
-    public GameObject gameOverPanel;    // Panel for the Game Over screen
-    public Text gameOverText;           // Optional: Text displayed on the Game Over screen
-    public GameObject matchOverScreen;
-    public GameObject gamePlayScreen;
+    // UI Text for round announcements
+    public Text roundAnnouncementText;
 
-    private bool gameEnded = false;
+    // Game variables
+    private int player1Wins = 0;
+    private int player2Wins = 0;
+    private int currentRound = 1;
+    private int totalRounds = 3;
+
+    private bool roundActive = true;
+
+    void Start()
+    {
+        StartCoroutine(AnnounceRound());
+    }
 
     void Update()
     {
-
-        if (!gameEnded)
+        if (roundActive)
         {
             CheckHealth();
-        }
-        else{
-            if (GameManager.gameManager.p1WinsNum >= 2){MatchOver();}
-            if (GameManager.gameManager.p2WinsNum >= 2){MatchOver();}
         }
     }
 
     void CheckHealth()
     {
-        bool player1HealthZero = false;
-        bool player2HealthZero = false;
-
-        // Check health based on the component type (Slider or Image)
-        if (player1HealthSlider != null)
+        if (player1HealthSlider.value <= 0 && roundActive)
         {
-            player1HealthZero = player1HealthSlider.value <= 0;
+            roundActive = false;
+            player2Wins++;
+            ShowWinScreen(2);
         }
-        else if (player1HealthImage != null)
+        else if (player2HealthSlider.value <= 0 && roundActive)
         {
-            player1HealthZero = player1HealthImage.fillAmount <= 0;
-        }
-
-        if (player2HealthSlider != null)
-        {
-            player2HealthZero = player2HealthSlider.value <= 0;
-        }
-        else if (player2HealthImage != null)
-        {
-            player2HealthZero = player2HealthImage.fillAmount <= 0;
-        }
-
-        // Show the win screen based on whose health is zero
-        if (player1HealthZero)
-        {
-            ShowWinScreen(2); // Player 2 wins
-        }
-        else if (player2HealthZero)
-        {
-            ShowWinScreen(1); // Player 1 wins
+            roundActive = false;
+            player1Wins++;
+            ShowWinScreen(1);
         }
     }
 
     void ShowWinScreen(int winningPlayer)
     {
-        gameEnded = true;
-        
         if (winningPlayer == 1)
         {
             player1WinImage.enabled = true;
             player2WinImage.enabled = false;
-            GameManager.gameManager.p1WinsNum++;
         }
         else if (winningPlayer == 2)
         {
             player1WinImage.enabled = false;
             player2WinImage.enabled = true;
-            GameManager.gameManager.p2WinsNum++;
         }
 
-        // Start the coroutine to show the Game Over screen
-        StartCoroutine(ShowGameOverScreenAfterDelay());
+        StartCoroutine(HandleEndOfRound());
     }
 
-    IEnumerator ShowGameOverScreenAfterDelay()
+    IEnumerator AnnounceRound()
     {
-        // Wait for 15 seconds
-        yield return new WaitForSeconds(3f);
+        roundAnnouncementText.text = "Round " + currentRound + "!";
+        roundAnnouncementText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3f); // Show round announcement for 3 seconds
+        roundAnnouncementText.gameObject.SetActive(false);
+    }
 
-        // Hide the win screens
+    IEnumerator HandleEndOfRound()
+    {
+        yield return new WaitForSeconds(5f); // Wait 5 seconds on the win screen
         player1WinImage.enabled = false;
         player2WinImage.enabled = false;
 
-        // Display the Game Over panel
-        if (gameOverPanel != null)
+        if (currentRound >= totalRounds || player1Wins > totalRounds / 2 || player2Wins > totalRounds / 2)
         {
-            gameOverPanel.SetActive(true);
+            // If the game is over, show the final winner and transition to the Game Over screen
+            ShowFinalWinner();
         }
-
-        // Optional: Update Game Over text
-        if (gameOverText != null)
+        else
         {
-            gameOverText.text = "Game Over";
+            // Start the next round
+            currentRound++;
+            roundActive = true;
+            ResetHealthBars();
+            StartCoroutine(AnnounceRound());
         }
     }
 
-    public void MatchOver(){
-        matchOverScreen.SetActive(true);
-        gamePlayScreen.SetActive(false);
+    void ShowFinalWinner()
+    {
+        if (player1Wins > player2Wins)
+        {
+            player1WinImage.enabled = true;
+        }
+        else if (player2Wins > player1Wins)
+        {
+            player2WinImage.enabled = true;
+        }
+
+        StartCoroutine(SwitchToGameOverScreen());
+    }
+
+    IEnumerator SwitchToGameOverScreen()
+    {
+        yield return new WaitForSeconds(10f); // Wait 10 seconds
+        SceneManager.LoadScene("GameOverScene");
+    }
+
+    void ResetHealthBars()
+    {
+        player1HealthSlider.value = player1HealthSlider.maxValue;
+        player2HealthSlider.value = player2HealthSlider.maxValue;
     }
 }
-
-
-
-
