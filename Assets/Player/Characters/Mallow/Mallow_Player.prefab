@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 872992029193422661}
   - component: {fileID: 6560731928889023692}
   - component: {fileID: 4347984307811211984}
+  - component: {fileID: 6157842239710521021}
   m_Layer: 0
   m_Name: Mallow_Player
   m_TagString: Untagged
@@ -135,6 +136,7 @@ Transform:
   - {fileID: 5356559455599134673}
   - {fileID: 7641427896769100919}
   - {fileID: 5642417833497922313}
+  - {fileID: 1195809179397502475}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &6386490819208310529
@@ -226,29 +228,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e2538368b217b5418e6d94591049df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: 
   moveSpeed: 5
-  horizontalInput: 0
-  isWalking: 0
+  attackDamage: 10
   dashDuration: 0.1
   dashDistance: 2
   jumpForce: 15
   jumps: 2
-  isGrounded: 0
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
   groundCheckRadius: 1.5
-  attackDamage: 10
+  stunTime: 0.3
+  N_ATTACK_cooldownTime: 0.8
+  N_ATTACK_lastAttackTime: 0
+  UP_ATTACK_cooldownTime: 1
+  UP_ATTACK_lastAttackTime: 0
+  DOWN_ATTACK_cooldownTime: 1
+  DOWN_ATTACK_lastAttackTime: 0
   isAttacking: 0
   canAttack: 1
   attackTimer: 0
-  hitbox: {fileID: 0}
-  characterName: 
+  isGrounded: 0
   isPlayer1: 0
-  currentState: 
   otherPlayerTransform: {fileID: 0}
   isDead: 0
-  isStunned: 0
+  cooldownDisplay: {fileID: 0}
+  up_cd: {fileID: 0}
+  down_cd: {fileID: 0}
+  normal_cd: {fileID: 0}
+  dash_cd: {fileID: 0}
+  currentState: 
 --- !u!95 &4347984307811211984
 Animator:
   serializedVersion: 5
@@ -270,6 +277,54 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6157842239710521021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2269985015034764995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e70272c7e44e36148a04eff42e2fccfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 67350094091997408, guid: f195e8e95ac904c4fb884379e3e93761, type: 3}
+  spawnPoint: {fileID: 1195809179397502475}
+  moveSpeed: 300
+  lifeTime: 1.2
+  bulletDamage: 10
+--- !u!1 &5144811492661190081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1195809179397502475}
+  m_Layer: 0
+  m_Name: ProjectileSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1195809179397502475
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5144811492661190081}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.54, y: 0.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6349198482055649023}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7301397789985366533
 GameObject:
   m_ObjectHideFlags: 0

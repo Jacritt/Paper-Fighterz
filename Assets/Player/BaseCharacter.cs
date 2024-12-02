@@ -39,6 +39,9 @@ public class BaseCharacter : MonoBehaviour
     public Transform otherPlayerTransform;
     public bool isDead = false;
 
+    [Header("SoundFX")]
+    public AudioClip jumpSound;
+
     [SerializeField] private GameObject cooldownDisplay;
     [SerializeField] private GameObject up_cd;
     [SerializeField] private GameObject down_cd;
@@ -201,6 +204,7 @@ public class BaseCharacter : MonoBehaviour
                 jumps--;
                 isJumping = true;
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                SoundFXManager.soundFXManager.PlaySoundEffect(jumpSound);
             }
         }else{
             if (Input.GetKeyDown(KeyCode.UpArrow) && jumps > 0)

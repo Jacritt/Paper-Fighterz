@@ -332,12 +332,12 @@ MonoBehaviour:
   jumps: 2
   groundCheckRadius: 1.5
   stunTime: 0.3
-  N_AttackTimer: 0
-  can_N_Attack: 1
-  UP_AttacktkTimer: 0
-  can_UP_Attack: 1
-  DOWN_AttacktkTimer: 0
-  can_DOWN_Attack: 1
+  N_ATTACK_cooldownTime: 0.5
+  N_ATTACK_lastAttackTime: 0
+  UP_ATTACK_cooldownTime: 0.5
+  UP_ATTACK_lastAttackTime: 0
+  DOWN_ATTACK_cooldownTime: 0.5
+  DOWN_ATTACK_lastAttackTime: 0
   isAttacking: 0
   canAttack: 1
   attackTimer: 0
@@ -345,6 +345,13 @@ MonoBehaviour:
   isPlayer1: 0
   otherPlayerTransform: {fileID: 0}
   isDead: 0
+  jumpSound: {fileID: 8300000, guid: e8823aa8182864a43bcb0efee6180390, type: 3}
+  cooldownDisplay: {fileID: 0}
+  up_cd: {fileID: 0}
+  down_cd: {fileID: 0}
+  normal_cd: {fileID: 0}
+  dash_cd: {fileID: 0}
+  currentState: 
 --- !u!95 &3473302242966869456
 Animator:
   serializedVersion: 5
